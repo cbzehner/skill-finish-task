@@ -1,0 +1,30 @@
+{
+  "name": "finish-task",
+  "version": "0.1.0",
+  "description": "Finish coding work with review gates, visual evidence, and repo-appropriate delivery through PRs or personal main.",
+  "author": {
+    "name": "cbzehner",
+    "email": "chris@cbzehner.com",
+    "url": "https://github.com/cbzehner"
+  },
+  "homepage": "https://github.com/cbzehner/skill-finish-task",
+  "repository": "https://github.com/cbzehner/skill-finish-task",
+  "license": "MIT",
+  "keywords": ["git", "review", "pull-request", "skills", "delivery"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Finish Task",
+    "shortDescription": "Finish coding work with review, evidence, and delivery gates.",
+    "longDescription": "A project-neutral finish workflow that reviews diffs, runs verification, captures visual evidence when needed, and delivers through PRs or guarded main merges based on repository metadata.",
+    "developerName": "cbzehner",
+    "category": "Productivity",
+    "capabilities": ["Review", "Git", "Write"],
+    "websiteURL": "https://github.com/cbzehner/skill-finish-task",
+    "defaultPrompt": [
+      "Finish this task and create a PR.",
+      "Review this diff and prepare it for delivery.",
+      "Finish and merge this local worktree into main."
+    ],
+    "brandColor": "#405C7A"
+  }
+}
