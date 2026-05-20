@@ -1,6 +1,6 @@
 {
   "name": "finish-task",
-  "description": "Finish coding work with review gates, visual evidence, and repo-appropriate delivery through PRs or personal main.",
+  "description": "Finish coding work with validation, review gates, visual evidence, and repo-appropriate delivery through PRs or personal main.",
   "version": "0.1.0",
   "author": {
     "name": "cbzehner",

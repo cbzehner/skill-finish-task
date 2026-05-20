@@ -1,7 +1,7 @@
 {
   "name": "finish-task",
   "version": "0.1.0",
-  "description": "Finish coding work with review gates, visual evidence, and repo-appropriate delivery through PRs or personal main.",
+  "description": "Finish coding work with validation, review gates, visual evidence, and repo-appropriate delivery through PRs or personal main.",
   "author": {
     "name": "cbzehner",
     "email": "chris@cbzehner.com",
@@ -15,7 +15,7 @@
   "interface": {
     "displayName": "Finish Task",
     "shortDescription": "Finish coding work with review, evidence, and delivery gates.",
-    "longDescription": "A project-neutral finish workflow that reviews diffs, runs verification, captures visual evidence when needed, and delivers through PRs or guarded main merges based on repository metadata.",
+    "longDescription": "A project-neutral finish workflow that consumes validation evidence, reviews diffs, captures visual evidence when needed, and delivers through PRs or guarded main merges based on repository metadata.",
     "developerName": "cbzehner",
     "category": "Productivity",
     "capabilities": ["Review", "Git", "Write"],

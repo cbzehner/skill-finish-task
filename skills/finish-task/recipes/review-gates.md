@@ -69,9 +69,9 @@ Tradeoff accepted: <only if real>
 
 This note should be specific to the repo, not a generic compliment.
 
-## Magi Review
+## Multi-Model Review
 
-Use the magi skill for non-trivial changes, architecture changes, risky bug fixes, security-sensitive work, UI migrations, and any task where the user requested magi review. Build a prompt with:
+Use `counsel --panel` or `magi` for non-trivial changes, architecture changes, risky bug fixes, security-sensitive work, UI migrations, and any task where the user requested multi-model review. Build a prompt with:
 
 - User goal.
 - Delivery mode.
@@ -83,13 +83,13 @@ Use the magi skill for non-trivial changes, architecture changes, risky bug fixe
 
 Ask advisors to return severity-ranked findings and whether anything blocks delivery.
 
-If magi is unavailable because CLIs/auth are missing, report that as a review gap. Do not invent a multi-advisor result. For tiny documentation-only changes, a local-only review is acceptable if you say why.
+If external advisors are unavailable because CLIs/auth are missing, report that as a review gap. Do not invent a multi-advisor result. For tiny documentation-only changes, a local-only review is acceptable if you say why.
 
-After magi returns:
+After the panel returns:
 
 - Fix any valid blocking findings.
 - Record false positives and why they are false.
-- Save or cite the magi session path if the magi skill produced one.
+- Save or cite the session path if the review skill produced one.
 
 ## Final Self-Review
 

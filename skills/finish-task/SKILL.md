@@ -1,12 +1,14 @@
 ---
 name: finish-task
 description: >-
-  Finish coding work end-to-end: review the diff, run verification, use magi and
-  complexity-guard, check architecture/philosophy alignment, capture screenshots
-  for UI work, then deliver through a PR, guarded default-branch commit, or worktree merge
-  based on repository metadata. Use when the user says finish, wrap up, ship it, make a PR,
-  create/update the PR, merge this worktree into the default branch, commit directly to the default branch,
-  or asks for a Superpowers-style task completion flow.
+  Finish coding work end-to-end after implementation is believed complete:
+  validate evidence, review the diff, use magi/counsel and complexity-guard,
+  check architecture/philosophy alignment, capture or attach screenshots for UI
+  work, then deliver through a PR, guarded default-branch commit, or worktree
+  merge based on repository metadata. Use when the user says finish, wrap up,
+  ship it, make a PR, create/update the PR, merge this worktree into the default
+  branch, commit directly to the default branch, or asks for a task completion
+  flow.
 argument-hint: "[--work-pr|--personal-main] [--skip-screenshots] [--upload] [--yes]"
 arguments:
   - options
@@ -20,6 +22,8 @@ allowed-tools: Bash Read Glob Grep
 Finish the current coding task with evidence, review, and the delivery path that matches the repo.
 
 This is a finalization workflow, not an implementation loop. If the task is not actually done, stop and report the remaining work instead of packaging an incomplete change.
+
+`validate` owns proof that the artifact works. This skill consumes that evidence, adds review gates, and performs repo-appropriate delivery.
 
 ## Generic Routing
 
@@ -110,20 +114,21 @@ Write a short internal scope note:
 
 Use this scope note to decide tests, screenshots, and PR body contents.
 
-### 3. Verification
+### 3. Validate
 
-Run the smallest credible verification set for the touched surfaces:
+Use the `validate` skill to prove the scoped artifact works before review or delivery. Pass it the finish scope, changed surfaces, plan/issue/PR acceptance criteria, and any user-requested proof.
+
+Validation must cover the smallest credible set for the touched surfaces:
 
 - Existing targeted tests for changed modules.
 - Typecheck/lint/build when the language or repo expects it.
 - Migrations/generation checks when schema, generated code, or lockfiles changed.
-- Browser verification for UI changes.
+- Browser verification and screenshots for UI-facing changes.
+- Acceptance criteria from plans, issues, PRDs, or user instructions.
 
-Prefer repo-native commands from `README`, `AGENTS.md`, `justfile`, `package.json`, `Makefile`, `pyproject.toml`, `Cargo.toml`, or CI config. Record exact commands and results.
+If `validate` reports `fail` or `blocked`, do not proceed to delivery. Fix in-scope failures, route unexplained failures to `diagnose`, or stop with the validation report.
 
-If a verification command fails, fix the issue if it is in scope. If it is unrelated or environmental, capture evidence and state the blocker clearly.
-
-Do not proceed past a failed required verification command unless the user explicitly acknowledges the blocker. `--yes` does not override failed verification.
+Do not proceed past failed required validation unless the user explicitly acknowledges the blocker. `--yes` does not override failed validation.
 
 ### 4. Review Gates
 
@@ -142,7 +147,7 @@ Do not proceed to delivery with unresolved high-severity findings. Fix them or s
 
 For UI, visual, workflow, browser, docs-rendering, email-template, report, or screenshot-requested changes, load [recipes/visual-evidence.md](recipes/visual-evidence.md). Keep project-specific screenshot helpers as optional examples, not required behavior.
 
-Screenshots are mandatory for UI-facing work unless the app cannot run. If blocked, include the exact blocker, the attempted command, and the partial evidence collected.
+Screenshots are mandatory for UI-facing work unless the app cannot run. If `validate` already captured them, inspect and reuse those artifacts. If blocked, include the exact blocker, the attempted command, and the partial evidence collected.
 
 Do not upload screenshots externally unless the user passes `--upload` or approves it during this workflow after seeing the privacy note in [recipes/visual-evidence.md](recipes/visual-evidence.md). Local artifacts live under `.browser-artifacts/`.
 
@@ -179,7 +184,7 @@ Finished <delivery target>.
 
 Review:
 - <findings fixed or "No unresolved high-severity findings">
-- Magi: <summary/path or unavailable reason>
+- Multi-model review: <summary/path or unavailable reason>
 - Complexity/architecture/philosophy: <summary>
 
 Verification:
@@ -199,7 +204,7 @@ Keep it short. Include blockers plainly when delivery could not complete.
 - `--personal-main`: Request guarded default-branch delivery after repo metadata is shown.
 - `--skip-screenshots`: Skip screenshots only when the user explicitly requests it or the change has no visual surface.
 - `--upload`: Request GitHub screenshot upload. Private/work repos still require public-URL acknowledgement.
-- `--yes`: Continue through non-destructive delivery steps. Still stop for default-branch pushes, force-pushes, cross-worktree merge conflicts, destructive cleanup, failed verification, or external screenshot upload without privacy acknowledgement.
+- `--yes`: Continue through non-destructive delivery steps. Still stop for default-branch pushes, force-pushes, cross-worktree merge conflicts, destructive cleanup, failed validation, or external screenshot upload without privacy acknowledgement.
 
 ## Companion Recipes
 

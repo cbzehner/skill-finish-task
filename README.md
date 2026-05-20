@@ -1,20 +1,22 @@
 # Finish Task
 
-Finish coding work with review gates, visual evidence, and repo-appropriate delivery.
+Finish coding work with validation, review gates, visual evidence, and repo-appropriate delivery.
 
 The skill is meant for the end of a task, when the agent should stop coding and prove the work is ready. It is project-neutral: it should work in any Git repository under `~/Developer/*/*` by detecting remotes, forks, upstreams, default branches, and local project instructions instead of hard-coded repo names.
 
 ## What It Does
 
 - Reviews the complete diff before delivery
-- Runs local verification and records exact commands
-- Uses `magi` for a second-opinion review
+- Delegates proof-of-work to `validate` and records exact evidence
+- Uses `counsel --panel` or `magi` for second-opinion review
 - Applies `complexity-guard`
 - Checks architecture and repo philosophy files
 - Captures screenshots for UI changes
 - Uploads screenshots to GitHub user attachments only after explicit public-URL consent
 - Creates or updates PRs when the repo should be reviewed through a branch
 - Commits or merges into the default branch only for local/user-owned repos or when explicitly requested
+
+`validate` proves the artifact works without delivery. `finish-task` consumes that evidence, runs review gates, and packages the work through the right git path.
 
 ## Usage
 
