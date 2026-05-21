@@ -19,7 +19,7 @@ Use repo-native visual tooling first. Otherwise:
 1. Start or verify the dev server.
 2. Capture desktop and mobile viewports for the changed flow.
 3. Include before/after when the change is feature-flagged, stacked, or layout-sensitive.
-4. Save artifacts in `.browser-artifacts/<task-slug>/`.
+4. Save screenshots and bulky browser outputs in `.agent/evidence/<run-slug>/artifacts/`.
 5. Inspect screenshots before claiming success.
 
 For deterministic flows, prefer Playwright. For exploratory checks, prefer `chrome-devtools-axi` or the browser skill's selected tool.
@@ -30,8 +30,8 @@ Summarize:
 
 ```markdown
 Screenshots:
-- Desktop <flow>: `.browser-artifacts/<task>/desktop-<flow>.png`
-- Mobile <flow>: `.browser-artifacts/<task>/mobile-<flow>.png`
+- Desktop <flow>: `.agent/evidence/<run-slug>/artifacts/desktop-<flow>.png`
+- Mobile <flow>: `.agent/evidence/<run-slug>/artifacts/mobile-<flow>.png`
 
 Visual verdict:
 - Pass / Needs attention
@@ -65,7 +65,7 @@ If the current repo has a helper, use it. If not, do not build this automation d
 Security rules:
 
 - Never upload screenshots containing secrets, customer private data, auth tokens, or personal information without explicit user approval.
-- Never commit `.browser-artifacts/`, auth storage state, HAR files, or videos unless the user explicitly wants an artifact committed.
+- Never commit `.agent/evidence/`, auth storage state, HAR files, or videos unless the user explicitly wants an evidence fixture committed.
 - Treat cached GitHub browser auth state as a credential. Keep it outside committed files and mention its path when a helper creates it.
 - Prefer a scratch issue or draft comment target for uploads when feasible; verify the target PR/issue URL before pasting.
 - Prefer redaction or local-only evidence for sensitive work.

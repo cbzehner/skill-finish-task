@@ -149,7 +149,7 @@ For UI, visual, workflow, browser, docs-rendering, email-template, report, or sc
 
 Screenshots are mandatory for UI-facing work unless the app cannot run. If `validate` already captured them, inspect and reuse those artifacts. If blocked, include the exact blocker, the attempted command, and the partial evidence collected.
 
-Do not upload screenshots externally unless the user passes `--upload` or approves it during this workflow after seeing the privacy note in [recipes/visual-evidence.md](recipes/visual-evidence.md). Local artifacts live under `.browser-artifacts/`.
+Do not upload screenshots externally unless the user passes `--upload` or approves it during this workflow after seeing the privacy note in [recipes/visual-evidence.md](recipes/visual-evidence.md). Local evidence lives under `.agent/evidence/<run-slug>/`; screenshots and other bulky files live under its `artifacts/` directory.
 
 ### 6. Commit Hygiene
 
@@ -162,7 +162,7 @@ git diff --cached --stat
 git diff --cached
 ```
 
-Stage only intended files. Exclude local artifacts, auth state, logs, temporary screenshots, and unrelated user edits. If `.browser-artifacts/` is not ignored, warn the user; change `.gitignore` only when they want that cleanup included.
+Stage only intended files. Exclude local evidence bundles, auth state, logs, temporary screenshots, and unrelated user edits. If `.agent/evidence/` is not ignored, warn the user; change `.gitignore` only when they want that cleanup included.
 
 Create commits with messages that explain why the change exists, not only what changed. If the branch already contains WIP commits, clean them before opening a PR when doing so is safe and not shared.
 
