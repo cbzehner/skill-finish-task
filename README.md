@@ -1,55 +1,59 @@
 # Finish Task
 
-Finish coding work with validation, review gates, visual evidence, and repo-appropriate delivery.
+Finish coding work end-to-end after implementation is believed complete: validate evidence, review the diff, use magi/counsel and complexity-guard, check architecture/philosophy alignment, capture or attach screenshots for UI work, then deliver through a PR, guarded default-branch commit, or worktree merge based on repository metadata. Use when the user says finish, wrap up, ship it, make a PR, create/update the PR, merge this worktree into the default branch, commit directly to the default branch, or asks for a task completion flow.
 
-The skill is meant for the end of a task, when the agent should stop coding and prove the work is ready. It is project-neutral: it should work in any Git repository under `~/Developer/*/*` by detecting remotes, forks, upstreams, default branches, and local project instructions instead of hard-coded repo names.
+## Skill
 
-## What It Does
+This repository packages one portable agent skill:
 
-- Reviews the complete diff before delivery
-- Delegates proof-of-work to `validate` and records exact evidence
-- Uses `counsel --panel` or `magi` for second-opinion review
-- Applies `complexity-guard`
-- Checks architecture and repo philosophy files
-- Captures screenshots for UI changes
-- Uploads screenshots to GitHub user attachments only after explicit public-URL consent
-- Creates or updates PRs when the repo should be reviewed through a branch
-- Commits or merges into the default branch only for local/user-owned repos or when explicitly requested
+- `finish-task` - Finish coding work end-to-end after implementation is believed complete: validate evidence, review the diff, use magi/counsel and complexity-guard, check architecture/philosophy alignment, capture or attach screenshots for UI work, then deliver through a PR, guarded default-branch commit, or worktree merge based on repository metadata. Use when the user says finish, wrap up, ship it, make a PR, create/update the PR, merge this worktree into the default branch, commit directly to the default branch, or asks for a task completion flow.
 
-`validate` proves the artifact works without delivery. `finish-task` consumes that evidence, runs review gates, and packages the work through the right git path.
+The canonical skill body lives at `skills/finish-task/SKILL.md`. Keep behavior changes there; keep this README focused on installation and packaging.
 
-## Usage
+## Install
 
-Ask the agent to finish the task:
+Clone the repository, then run the installer:
 
-```text
-finish this task
-wrap this up and make a PR
-finish and merge this local worktree into the default branch
-ship this on the default branch
+```bash
+git clone https://github.com/cbzehner/skill-finish-task.git
+cd skill-finish-task
+./install.sh all
 ```
 
-## Files
+Install targets:
+
+- `./install.sh claude` -> `~/.claude/skills/finish-task`
+- `./install.sh codex` -> `~/.codex/skills/finish-task`
+- `./install.sh agents` -> `~/.agents/skills/finish-task` for generic agent harnesses such as Pi/Hermes-style setups
+- `./install.sh opencode` -> `~/.config/opencode/skills/finish-task`
+- `./install.sh all --copy` copies files instead of symlinking
+
+Manual installation is just a symlink or copy from `skills/finish-task` into your agent's skills directory.
+
+## Compatibility
+
+This repo uses the common `skills/<name>/SKILL.md` layout so agents that understand file-based skills can load it directly. Host-specific metadata is included where useful:
+
+- Claude Code: `.claude-plugin/plugin.json` and direct `~/.claude/skills` install
+- Codex CLI: `.codex-plugin/plugin.json` with `skills: "./skills/"` and direct `~/.codex/skills` install
+- Other agents: direct install to the agent's skills directory; unsupported frontmatter fields can be ignored
+
+Some skills mention optional host tools such as `Task`, `Agent`, `Skill`, MCP tools, or browser automation CLIs. On hosts that do not provide those tools, adapt to equivalent local capabilities and keep the same workflow intent.
+
+## Public Safety
+
+These repositories are public. Do not commit organization-specific instructions, private repository names, secrets, tokens, cookies, raw session logs, customer data, or machine-local paths. Use environment variables and generic paths in examples.
+
+## Repository Layout
 
 ```text
-.claude-plugin/plugin.json
-.codex-plugin/plugin.json
+.claude-plugin/plugin.json   # Claude plugin metadata
+.codex-plugin/plugin.json    # Codex plugin metadata
+install.sh                   # Symlink/copy installer for common agent skill dirs
 skills/finish-task/SKILL.md
-skills/finish-task/recipes/review-gates.md
-skills/finish-task/recipes/visual-evidence.md
-skills/finish-task/recipes/delivery.md
+README.md
+LICENSE
 ```
-
-## Packaging Notes
-
-This follows the same `~/Developer/Personal/skill-*` layout as the other stable local skills:
-
-- `.claude-plugin/plugin.json` for Claude plugin installs
-- `.codex-plugin/plugin.json` with `skills: "./skills/"` for Codex plugin installs
-- one skill directory under `skills/`
-- small recipe files only where they remove noise from the main trigger file
-
-Project-specific helpers belong in the target repo. This skill can reference them when present, but should not require or recreate them.
 
 ## License
 

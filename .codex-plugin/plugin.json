@@ -1,30 +1,30 @@
 {
   "name": "finish-task",
-  "version": "0.1.0",
-  "description": "Finish coding work with validation, review gates, visual evidence, and repo-appropriate delivery through PRs or personal main.",
+  "version": "1.0.0",
+  "description": "Finish coding work end-to-end after implementation is believed complete: validate evidence, review the diff, use magi/counsel and complexity-guard, check architecture/philosophy alignment, capture or attach screenshots for UI work, then deliver through a PR, guarded default-branch commit, or worktree merge based on repository metadata. Use when the user says finish, wrap up, ship it, make a PR, create/update the PR, merge this worktree into the default branch, commit directly to the default branch, or asks for a task completion flow.",
   "author": {
     "name": "cbzehner",
-    "email": "chris@cbzehner.com",
     "url": "https://github.com/cbzehner"
   },
   "homepage": "https://github.com/cbzehner/skill-finish-task",
   "repository": "https://github.com/cbzehner/skill-finish-task",
   "license": "MIT",
-  "keywords": ["git", "review", "pull-request", "skills", "delivery"],
+  "keywords": [
+    "finish-task",
+    "finish",
+    "task",
+    "agent-skill"
+  ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Finish Task",
-    "shortDescription": "Finish coding work with review, evidence, and delivery gates.",
-    "longDescription": "A project-neutral finish workflow that consumes validation evidence, reviews diffs, captures visual evidence when needed, and delivers through PRs or guarded main merges based on repository metadata.",
+    "shortDescription": "Finish coding work end-to-end after implementation is believed complete: validate evidence, review the diff, use magi...",
+    "longDescription": "Finish coding work end-to-end after implementation is believed complete: validate evidence, review the diff, use magi/counsel and complexity-guard, check architecture/philosophy alignment, capture or attach screenshots for UI work, then deliver through a PR, guarded default-branch commit, or worktree merge based on repository metadata. Use when the user says finish, wrap up, ship it, make a PR, create/update the PR, merge this worktree into the default branch, commit directly to the default branch, or asks for a task completion flow.",
     "developerName": "cbzehner",
-    "category": "Productivity",
-    "capabilities": ["Review", "Git", "Write"],
-    "websiteURL": "https://github.com/cbzehner/skill-finish-task",
-    "defaultPrompt": [
-      "Finish this task and create a PR.",
-      "Review this diff and prepare it for delivery.",
-      "Finish and merge this local worktree into main."
+    "category": "Development",
+    "capabilities": [
+      "Development"
     ],
-    "brandColor": "#405C7A"
+    "websiteURL": "https://github.com/cbzehner/skill-finish-task"
   }
 }

@@ -1,10 +1,10 @@
 {
   "name": "finish-task",
-  "description": "Finish coding work with validation, review gates, visual evidence, and repo-appropriate delivery through PRs or personal main.",
-  "version": "0.1.0",
+  "description": "Finish coding work end-to-end after implementation is believed complete: validate evidence, review the diff, use magi/counsel and complexity-guard, check architecture/philosophy alignment, capture or attach screenshots for UI work, then deliver through a PR, guarded default-branch commit, or worktree merge based on repository metadata. Use when the user says finish, wrap up, ship it, make a PR, create/update the PR, merge this worktree into the default branch, commit directly to the default branch, or asks for a task completion flow.",
+  "version": "1.0.0",
   "author": {
     "name": "cbzehner",
-    "email": "chris@cbzehner.com"
+    "url": "https://github.com/cbzehner"
   },
   "repository": "https://github.com/cbzehner/skill-finish-task",
   "license": "MIT"
