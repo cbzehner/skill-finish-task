@@ -2,7 +2,7 @@
 name: finish-task
 description: >-
   Finish coding work end-to-end after implementation is believed complete:
-  validate evidence, review the diff, use magi/counsel and complexity-guard,
+  validate evidence, review the diff, use `counsel --panel` and complexity-guard,
   check architecture/philosophy alignment, capture or attach screenshots for UI
   work, then deliver through a PR, guarded default-branch commit, or worktree
   merge based on repository metadata. Use when the user says finish, wrap up,

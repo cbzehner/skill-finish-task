@@ -71,7 +71,7 @@ This note should be specific to the repo, not a generic compliment.
 
 ## Multi-Model Review
 
-Use `counsel --panel` or `magi` for non-trivial changes, architecture changes, risky bug fixes, security-sensitive work, UI migrations, and any task where the user requested multi-model review. Build a prompt with:
+Use `counsel --panel` for non-trivial changes, architecture changes, risky bug fixes, security-sensitive work, UI migrations, and any task where the user requested multi-model review. `magi` is accepted as an alias for the same workflow. Build a prompt with:
 
 - User goal.
 - Delivery mode.
