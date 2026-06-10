@@ -1,3 +1,5 @@
+> **Moved:** this skill now lives in [cbzehner/skills](https://github.com/cbzehner/skills) under `skills/finish-task/`. This repo is archived and read-only.
+
 # Finish Task
 
 Finish coding work end to end once implementation looks done. It checks evidence, reviews the diff, runs validation, and chooses the right delivery path for the repo.
