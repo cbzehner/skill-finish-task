@@ -17,6 +17,25 @@ Check:
 
 Use file/line references for findings when practical. Do not bury a real bug in a summary.
 
+## Local Autoreview
+
+Run the repo's local autoreview path when one exists. This can be an `autoreview` skill, a project script, a documented `make review` target, or a local reviewer command named in repo docs. Prefer the local path because it usually knows project conventions and catches edge cases before PR/CI.
+
+Discovery commands:
+
+```bash
+find . -maxdepth 3 \( -iname '*autoreview*' -o -iname '*auto-review*' -o -iname '*review*' \) -print
+rg -n "autoreview|auto review|make review|review gate|reviewer" AGENTS.md CLAUDE.md README.md docs .github 2>/dev/null
+```
+
+If no local autoreview path exists, record `Autoreview: unavailable; used manual review gates instead.` Do not install a new tool during finish-task unless the user explicitly asked for that setup.
+
+If autoreview produces findings:
+
+- Fix valid in-scope high-severity findings before delivery.
+- Record false positives with a short reason.
+- Save the command and output path in the finish evidence note.
+
 ## Complexity Guard
 
 Apply the complexity-guard skill:

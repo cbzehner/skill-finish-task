@@ -2,13 +2,13 @@
 name: finish-task
 description: >-
   Finish coding work end-to-end after implementation is believed complete:
-  validate evidence, review the diff, use `counsel --panel` and complexity-guard,
-  check architecture/philosophy alignment, capture or attach screenshots for UI
-  work, then deliver through a PR, guarded default-branch commit, or worktree
-  merge based on repository metadata. Use when the user says finish, wrap up,
-  ship it, make a PR, create/update the PR, merge this worktree into the default
-  branch, commit directly to the default branch, or asks for a task completion
-  flow.
+  validate evidence, capture provenance, run local autoreview or equivalent
+  review gates, use `counsel --panel` and complexity-guard, check
+  architecture/philosophy alignment, capture or attach screenshots for UI work,
+  then deliver through a PR, guarded default-branch commit, or worktree merge
+  based on repository metadata. Use when the user says finish, wrap up, ship it,
+  make a PR, create/update the PR, merge this worktree into the default branch,
+  commit directly to the default branch, or asks for a task completion flow.
 argument-hint: "[--work-pr|--personal-main] [--skip-screenshots] [--upload] [--yes]"
 arguments:
   - options
@@ -130,7 +130,22 @@ If `validate` reports `fail` or `blocked`, do not proceed to delivery. Fix in-sc
 
 Do not proceed past failed required validation unless the user explicitly acknowledges the blocker. `--yes` does not override failed validation.
 
-### 4. Review Gates
+### 4. Evidence And Provenance
+
+Create or update a concise finish evidence note before review so later sessions can reconstruct what happened. Prefer `.agent/evidence/<run-slug>/summary.md` when validation already created a bundle; otherwise keep the note in your working summary and include it in the final report.
+
+Capture:
+
+- User goal and finish scope.
+- Branch name, commit range, and delivery mode.
+- Validation commands and artifact paths.
+- Review commands or reviewer sessions.
+- Local screenshots or visual evidence paths when applicable.
+- Agent/session provenance when discoverable: Codex/Claude/session ID, current conversation/session URL, task/run ID, and the supervising agent name.
+
+If a session ID is not available from local logs, environment, or the running tool, write `session: unavailable` rather than guessing. Never include secrets, cookies, auth headers, raw prompts containing credentials, or private browser state in evidence files, commits, or PR bodies.
+
+### 5. Review Gates
 
 Load [recipes/review-gates.md](recipes/review-gates.md) and complete every applicable gate. The recipe owns the detailed review checklist; do not duplicate it in the final report.
 
@@ -143,7 +158,7 @@ Load [recipes/review-gates.md](recipes/review-gates.md) and complete every appli
 
 Do not proceed to delivery with unresolved high-severity findings. Fix them or stop.
 
-### 5. Visual Evidence
+### 6. Visual Evidence
 
 For UI, visual, workflow, browser, docs-rendering, email-template, report, or screenshot-requested changes, load [recipes/visual-evidence.md](recipes/visual-evidence.md). Keep project-specific screenshot helpers as optional examples, not required behavior.
 
@@ -151,7 +166,7 @@ Screenshots are mandatory for UI-facing work unless the app cannot run. If `vali
 
 Do not upload screenshots externally unless the user passes `--upload` or approves it during this workflow after seeing the privacy note in [recipes/visual-evidence.md](recipes/visual-evidence.md). Local evidence lives under `.agent/evidence/<run-slug>/`; screenshots and other bulky files live under its `artifacts/` directory.
 
-### 6. Commit Hygiene
+### 7. Commit Hygiene
 
 Inspect the final diff:
 
@@ -164,9 +179,9 @@ git diff --cached
 
 Stage only intended files. Exclude local evidence bundles, auth state, logs, temporary screenshots, and unrelated user edits. If `.agent/evidence/` is not ignored, warn the user; change `.gitignore` only when they want that cleanup included.
 
-Create commits with messages that explain why the change exists, not only what changed. If the branch already contains WIP commits, clean them before opening a PR when doing so is safe and not shared.
+Create commits with messages that explain why the change exists, not only what changed. If the branch already contains WIP commits, clean them before opening a PR when doing so is safe and not shared. History cleanup follows the same gate as Delivery: backup branch first, and explicit user confirmation before any force-push of a shared or already-pushed branch.
 
-### 7. Delivery
+### 8. Delivery
 
 Load [recipes/delivery.md](recipes/delivery.md) and execute the selected mode:
 
@@ -175,7 +190,7 @@ Load [recipes/delivery.md](recipes/delivery.md) and execute the selected mode:
 
 Create a backup branch before rebasing, force-pushing, or merging across worktrees.
 
-### 8. Finish Report
+### 9. Finish Report
 
 Final response shape:
 
@@ -190,6 +205,8 @@ Review:
 Verification:
 - `<command>`: pass/fail
 - Screenshots: <local path or PR links>
+- Evidence: <summary path or "inline only">
+- Provenance: <session/task id or unavailable>
 
 Delivery:
 - PR: <url> / Commit: <sha> / Default branch updated: <sha>
